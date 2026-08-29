@@ -12,7 +12,9 @@ INSTRUCTIONS = """
     Keep answers concise: 2-3 sentences max. If you don't know the answer, say so and suggest who to contact.
 """
 
-load_dotenv()  # Load environment variables from .env file
+# Load values from a local .env file, such as API credentials and a custom API URL.
+# Do this before creating the client so the client can read those settings.
+load_dotenv()
     
 # Create a client that connects to the local Ollama server.
 # Ollama does not use this API key, but the OpenAI client requires a value.
@@ -29,9 +31,11 @@ response = client.responses.create(
     model="gpt-5.6-luna",
     # Give the model its behavior instructions and the user's question.
     instructions=INSTRUCTIONS,
+    # A response can contain multiple messages. Here, we send one user message.
     input=[
         {
             "role": "user",
+            # This one message has two parts: a written question and the PDF itself.
             "content": [
                 {
                     "type": "input_text",

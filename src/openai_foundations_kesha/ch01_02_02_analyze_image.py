@@ -19,6 +19,7 @@ with open("../../data/error.png", "rb") as error_image:
     # Read the image and convert it to base64 text so it can be sent in an API request.
     base64_encoded_image = base64.b64encode(error_image.read()).decode("utf-8")
 
+#
 # Ask the selected model a question and wait until it returns a response.
 response = client.responses.create(
     # This is the name of the Ollama model to use.
